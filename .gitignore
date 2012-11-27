@@ -1,1 +1,8 @@
-target/
+# Java crap
+*.ctxt
+*.class
+
+# Windows & OS X crap
+.DS_Store
+Thumbs.db
+Desktop.ini
