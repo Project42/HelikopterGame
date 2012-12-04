@@ -8,6 +8,7 @@ public class Helicopter extends Actor {
         speed = 8;
     }
 
+    @Override
     public void act() {
         if (Greenfoot.isKeyDown("w")) move(0, -speed);
         if (Greenfoot.isKeyDown("s")) move(0, +speed);

@@ -10,6 +10,7 @@ public class HelicopterWorld extends World {
         addObject(helicopter, 320, 240);
     }
 
+    @Override
     public void act() {
         for (Actor actor : (List<Actor>)getObjects(null)) {
             if (actor == helicopter) continue;
