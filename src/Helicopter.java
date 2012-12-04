@@ -36,10 +36,10 @@ public class Helicopter extends Actor {
     }
 
     private void consumePowerUp() {
-        PowerUp newPowerUp = (PowerUp)getOneIntersectingObject(PowerUp.class);
+        Actor newPowerUp = (Actor)getOneIntersectingObject(PowerUp.class);
         if (newPowerUp != null) {
-            setPowerUp(newPowerUp);
-            powerUp.getWorld().removeObject(powerUp);
+            setPowerUp((PowerUp)newPowerUp);
+            newPowerUp.getWorld().removeObject(newPowerUp);
         }
     }
 

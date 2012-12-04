@@ -1,6 +1,6 @@
 import greenfoot.*;
 
-public abstract class PowerUp extends Actor {
-    abstract void apply(Helicopter helicopter);
-    abstract void remove(Helicopter helicopter);
+public interface PowerUp {
+    void apply(Helicopter helicopter);
+    void remove(Helicopter helicopter);
 }
