@@ -2,6 +2,7 @@ import greenfoot.*;
 
 public class Helicopter extends Actor {
     private int speed;
+    private PowerUp powerUp;
 
     public Helicopter() {
         speed = 8;
@@ -29,8 +30,10 @@ public class Helicopter extends Actor {
     }
 
     private void consumePowerUp() {
-        PowerUp powerUp = (PowerUp)getOneIntersectingObject(PowerUp.class);
-        if (powerUp != null) {
+        PowerUp newPowerUp = (PowerUp)getOneIntersectingObject(PowerUp.class);
+        if (newPowerUp != null) {
+            if (powerUp != null) powerUp.remove(this);
+            powerUp = newPowerUp;
             powerUp.apply(this);
             powerUp.getWorld().removeObject(powerUp);
         }
