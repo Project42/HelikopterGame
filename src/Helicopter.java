@@ -20,11 +20,19 @@ public class Helicopter extends Actor {
         setLocation(getX() + dx, getY() + dy);
     }
 
+    public void increaseSpeed() {
+        speed = 16;
+    }
+
+    public void decreaseSpeed() {
+        speed = 8;
+    }
+
     private void consumePowerUp() {
-        Actor powerUp = getOneIntersectingObject(SpeedPowerUp.class);
+        PowerUp powerUp = (PowerUp)getOneIntersectingObject(PowerUp.class);
         if (powerUp != null) {
+            powerUp.apply(this);
             powerUp.getWorld().removeObject(powerUp);
-            speed = 16;
         }
     }
 }
