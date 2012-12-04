@@ -3,6 +3,7 @@ import greenfoot.*;
 public class Helicopter extends Actor {
     private int speed;
     private PowerUp powerUp;
+    private int powerUpActsRemaining;
 
     public Helicopter() {
         speed = 8;
@@ -14,6 +15,10 @@ public class Helicopter extends Actor {
         if (Greenfoot.isKeyDown("s")) move(0, +speed);
         if (Greenfoot.isKeyDown("a")) move(-speed, 0);
         if (Greenfoot.isKeyDown("d")) move(+speed, 0);
+
+        if (--powerUpActsRemaining <= 0) {
+            setPowerUp(null);
+        }
 
         consumePowerUp();
     }
@@ -33,10 +38,18 @@ public class Helicopter extends Actor {
     private void consumePowerUp() {
         PowerUp newPowerUp = (PowerUp)getOneIntersectingObject(PowerUp.class);
         if (newPowerUp != null) {
-            if (powerUp != null) powerUp.remove(this);
-            powerUp = newPowerUp;
-            powerUp.apply(this);
+            setPowerUp(newPowerUp);
             powerUp.getWorld().removeObject(powerUp);
         }
+    }
+
+    private void setPowerUp(PowerUp newPowerUp) {
+        if (newPowerUp == powerUp) return;
+        if (powerUp != null) powerUp.remove(this);
+        if (newPowerUp != null) {
+            powerUp = newPowerUp;
+            powerUp.apply(this);
+        }
+        powerUpActsRemaining = 1000;
     }
 }
