@@ -1,5 +1,5 @@
 #Greenfoot properties
-#Tue Dec 04 13:30:46 CET 2012
+#Tue Dec 04 13:48:24 CET 2012
 target2.name=MinigameButton
 target2.naviview.expanded=false
 target2.editor.height=700
@@ -17,6 +17,7 @@ target1.naviview.expanded=false
 target1.editor.height=700
 target1.showInterface=false
 target1.name=MainMenu
+class.SpeedPowerUp.image=mushroom.png
 mainWindow.width=859
 class.MainMenu.superclass=greenfoot.World
 target1.editor.y=34
@@ -26,6 +27,7 @@ target1.width=90
 mainWindow.y=107
 mainWindow.height=548
 mainWindow.x=46
+class.SpeedPowerUp.superclass=greenfoot.Actor
 target2.type=ClassTarget
 world.lastInstantiated=MainMenu
 class.Helicopter.superclass=greenfoot.Actor
