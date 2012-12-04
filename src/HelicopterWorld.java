@@ -5,7 +5,7 @@ public class HelicopterWorld extends World {
     private Helicopter helicopter;
 
     public HelicopterWorld() {
-        super(640, 480, 1);
+        super(640, 480, 1, false);
         helicopter = new Helicopter();
         addObject(helicopter, 320, 240);
     }
