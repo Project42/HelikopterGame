@@ -1,4 +1,5 @@
 import greenfoot.*;
+import javax.swing.*;
 
 public class Helicopter extends Actor {
     private int speed;
@@ -18,6 +19,33 @@ public class Helicopter extends Actor {
 
         if (--powerUpActsRemaining <= 0) {
             setPowerUp(null);
+        }
+        
+        Actor menubar = getOneObjectAtOffset(0, 1, MenuBar.class);
+        if (menubar != null) {
+            move(0, -1);
+            if (powerUpActsRemaining > 0) {
+                move(0, -1);
+            }
+        }
+        
+        Actor houselinks = getOneObjectAtOffset(1, 0, House.class);
+        Actor houserechts = getOneObjectAtOffset(-2, 0, House.class);
+        Actor houseboven = getOneObjectAtOffset(0, 1, House.class);
+        
+        if (houselinks != null && Greenfoot.isKeyDown("d")) {
+            JOptionPane.showMessageDialog(null, "Boem");
+            resetLocation();
+        }
+        
+        if (houserechts != null && Greenfoot.isKeyDown("a")) {
+            JOptionPane.showMessageDialog(null, "Boem");
+            resetLocation();
+        }
+        
+        if (houseboven != null && Greenfoot.isKeyDown("s")) {
+            JOptionPane.showMessageDialog(null, "Boem");
+            resetLocation();
         }
 
         consumePowerUp();
@@ -51,5 +79,9 @@ public class Helicopter extends Actor {
             powerUp.apply(this);
         }
         powerUpActsRemaining = 1000;
+    }
+    
+    private void resetLocation() {
+        setLocation(40, 35);
     }
 }

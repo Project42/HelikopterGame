@@ -6,6 +6,7 @@ public class HelicopterWorld extends World {
     private Counter scoreCounter;
     private MenuBar menuBar;
     private House house1;
+    private House house2;
     private SpeedPowerUp speed1;
 
     public HelicopterWorld() {
@@ -23,10 +24,13 @@ public class HelicopterWorld extends World {
         house1 = new House();
         addObject(house1, 20, 65);
         
+        house2 = new House();
+        addObject(house2, 75, 65);
+        
         speed1 = new SpeedPowerUp();
         addObject(speed1, 20, 40);
         
-        setPaintOrder(Counter.class, MenuBar.class, House.class);
+        setPaintOrder(Counter.class, Helicopter.class, MenuBar.class, House.class);
     }
 
     @Override
@@ -43,4 +47,6 @@ public class HelicopterWorld extends World {
         menuBar.setLocation(39, 75);
         scoreCounter.add(1);
     }
+    
+
 }
