@@ -6,7 +6,7 @@ public class Helicopter extends Actor {
     private int powerUpActsRemaining;
 
     public Helicopter() {
-        speed = 8;
+        speed = 2;
     }
 
     @Override
@@ -28,11 +28,11 @@ public class Helicopter extends Actor {
     }
 
     public void increaseSpeed() {
-        speed = 16;
+        speed = 3;
     }
 
     public void decreaseSpeed() {
-        speed = 8;
+        speed = 2;
     }
 
     private void consumePowerUp() {
