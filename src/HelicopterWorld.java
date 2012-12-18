@@ -21,7 +21,7 @@ public class HelicopterWorld extends World {
         addObject(menuBar, 39, 75);
         
         house1 = new House();
-        addObject(house1, 20, 20);
+        addObject(house1, 20, 65);
         
         speed1 = new SpeedPowerUp();
         addObject(speed1, 20, 40);
@@ -34,11 +34,11 @@ public class HelicopterWorld extends World {
         for (Actor actor : (List<Actor>)getObjects(null)) {
             if (actor == helicopter) continue;
             if (actor == scoreCounter) continue;
+        
             actor.setLocation(actor.getX() + 40 - helicopter.getX(), actor.getY());
-            actor.setLocation(actor.getX(), actor.getY() + 35 - helicopter.getY());
         }
 
-        helicopter.setLocation(40, 35);
+        helicopter.setLocation(40, helicopter.getY());
         scoreCounter.setLocation(6, 74);
         menuBar.setLocation(39, 75);
         scoreCounter.add(1);
