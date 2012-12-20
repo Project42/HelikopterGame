@@ -5,20 +5,40 @@ public class Helicopter extends Actor {
     private int speed;
     private PowerUp powerUp;
     private int powerUpActsRemaining;
+    public int RespawnTimer;
+    protected GreenfootImage image1;
+    protected GreenfootImage image2;
 
     public Helicopter() {
         speed = 1;
+        image1 = new GreenfootImage("HELIrechts.png");
+        image2 = new GreenfootImage("HELIlinks.png");
     }
 
     @Override
     public void act() {
         if (Greenfoot.isKeyDown("w")) move(0, -speed);
         if (Greenfoot.isKeyDown("s")) move(0, +speed);
-        if (Greenfoot.isKeyDown("a")) move(-speed, 0);
-        if (Greenfoot.isKeyDown("d")) move(+speed, 0);
-
+        if (Greenfoot.isKeyDown("a")) {
+            move(-speed, 0); 
+            switchImageLeft();
+        }
+        if (Greenfoot.isKeyDown("d")) {
+            move(+speed, 0); 
+            switchImageRight();
+        }
+        
+        if (atWorldEdge() == true)    
+        {    
+           resetLocation();
+        }   
+        
         if (--powerUpActsRemaining <= 0) {
             setPowerUp(null);
+        }
+        
+        if (--RespawnTimer <= 0) {
+
         }
         
         Actor menubar = getOneObjectAtOffset(0, 1, MenuBar.class);
@@ -83,5 +103,25 @@ public class Helicopter extends Actor {
     
     private void resetLocation() {
         setLocation(40, 35);
+        RespawnTimer = 100;
     }
+    
+        protected void switchImageLeft()
+    {
+        setImage(image2);
+    }
+
+    protected void switchImageRight()
+    {
+        setImage(image1);
+    }
+    
+    public boolean atWorldEdge() {   
+        if (getY() == 0) {  
+            return true;
+        } 
+        else {  
+            return false;  
+        }  
+    }  
 }
