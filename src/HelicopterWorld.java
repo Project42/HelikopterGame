@@ -7,10 +7,14 @@ public class HelicopterWorld extends World {
     private MenuBar menuBar;
     private House house1;
     private House house2;
+    private Background background;
     private SpeedPowerUp speed1;
-
+    
     public HelicopterWorld() {
         super(80, 80, 10, false);
+        
+        background = new Background();
+        addObject(background, 40, 39);
         
         helicopter = new Helicopter();
         addObject(helicopter, 40, 35);
@@ -29,7 +33,7 @@ public class HelicopterWorld extends World {
         
         speed1 = new SpeedPowerUp();
         addObject(speed1, 20, 40);
-        
+          
         setPaintOrder(Counter.class, Helicopter.class, MenuBar.class, House.class);
     }
 

@@ -5,9 +5,11 @@ public class Helicopter extends Actor {
     private int speed;
     private PowerUp powerUp;
     private int powerUpActsRemaining;
-    public int RespawnTimer;
+    public int respawnTimer = 10000;
     protected GreenfootImage image1;
     protected GreenfootImage image2;
+    private int actsTillFlicker;
+    private int xtest = 0;
 
     public Helicopter() {
         speed = 1;
@@ -37,8 +39,25 @@ public class Helicopter extends Actor {
             setPowerUp(null);
         }
         
-        if (--RespawnTimer <= 0) {
-
+        if (--respawnTimer <= 0) {
+            speed = 0;
+            if (xtest < 6) {
+                if (--actsTillFlicker <= 0) {
+                     if (getImage().getTransparency() == 0) {
+                         getImage().setTransparency(255);
+                     } else {
+                         getImage().setTransparency(0);
+                     }
+                     actsTillFlicker = 50;
+                     xtest++;
+                }
+            }
+            else if (xtest == 6) {
+                respawnTimer = 10000;
+                speed = 1;
+                xtest = 0;
+            }
+     
         }
         
         Actor menubar = getOneObjectAtOffset(0, 1, MenuBar.class);
@@ -103,7 +122,7 @@ public class Helicopter extends Actor {
     
     private void resetLocation() {
         setLocation(40, 35);
-        RespawnTimer = 100;
+        respawnTimer = 1;
     }
     
         protected void switchImageLeft()
