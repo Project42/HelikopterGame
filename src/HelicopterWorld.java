@@ -50,6 +50,7 @@ public class HelicopterWorld extends World {
         scoreCounter.setLocation(6, 74);
         menuBar.setLocation(39, 75);
         scoreCounter.add(1);
+        background.setLocation(40, 39);
     }
     
 
