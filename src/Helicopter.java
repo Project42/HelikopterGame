@@ -14,12 +14,13 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 import java.util.ArrayList;
+import javax.swing.*;
 
 public class Helicopter extends Actor {
     private int speed;
     private PowerUp powerUp;
     private int powerUpActsRemaining;
-    public int respawnTimer = 10000;
+    public int respawnTimer = 1000000000;
     protected GreenfootImage image1;
     protected GreenfootImage image2;
     private int actsTillFlicker;
@@ -71,7 +72,7 @@ public class Helicopter extends Actor {
                 }
             }
             else if (xtest == 6) {
-                respawnTimer = 10000;
+                respawnTimer = 10000000;
                 speed = 1;
                 xtest = 0;
             }
@@ -101,7 +102,13 @@ public class Helicopter extends Actor {
         if (houseboven != null && Greenfoot.isKeyDown("s")) {
             resetLocation();
         }
-
+            
+        Actor victim = getOneObjectAtOffset(0, 0, Victim.class);
+        if (victim != null) {
+            JOptionPane.showMessageDialog(null,"Je hebt iemand gered!");
+            getWorld().removeObject(victim);
+        }
+        
         consumePowerUp();
     }
 
