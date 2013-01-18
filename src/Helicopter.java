@@ -21,16 +21,13 @@ public class Helicopter extends Actor {
     private PowerUp powerUp;
     private int powerUpActsRemaining;
     public int respawnTimer = 1000000000;
-    protected GreenfootImage image1;
-    protected GreenfootImage image2;
     private int actsTillFlicker;
     private int xtest = 0;
     private String direction;
+    private boolean visibility;
 
     public Helicopter() {
         speed = 1;
-        image1 = new GreenfootImage("HELIrechts.png");
-        image2 = new GreenfootImage("HELIlinks.png");
     }
 
     @Override
@@ -62,10 +59,12 @@ public class Helicopter extends Actor {
         if (--respawnTimer <= 0) {
             if (xtest < 6) {
                 if (--actsTillFlicker <= 0) {
-                     if (getImage().getTransparency() == 0) {
-                         getImage().setTransparency(255);
+                     if (!visibility) {
+                         setImage("helikopter_links.gif");
+                         visibility = true;
                      } else {
-                         getImage().setTransparency(0);
+                         setImage("helikopter_rechts.gif");
+                         visibility = false;
                      }
                      actsTillFlicker = 50;
                      xtest++;
