@@ -40,7 +40,6 @@ public class Helicopter extends Actor {
         }
         
         if (--respawnTimer <= 0) {
-            speed = 0;
             if (xtest < 6) {
                 if (--actsTillFlicker <= 0) {
                      if (getImage().getTransparency() == 0) {
@@ -73,17 +72,14 @@ public class Helicopter extends Actor {
         Actor houseboven = getOneObjectAtOffset(0, 1, House.class);
         
         if (houselinks != null && Greenfoot.isKeyDown("d")) {
-            JOptionPane.showMessageDialog(null, "Boem");
             resetLocation();
         }
         
         if (houserechts != null && Greenfoot.isKeyDown("a")) {
-            JOptionPane.showMessageDialog(null, "Boem");
             resetLocation();
         }
         
         if (houseboven != null && Greenfoot.isKeyDown("s")) {
-            JOptionPane.showMessageDialog(null, "Boem");
             resetLocation();
         }
 
@@ -121,8 +117,13 @@ public class Helicopter extends Actor {
     }
     
     private void resetLocation() {
+        speed = 0;
+        Kaboom kaboom = new Kaboom();
+        int x = getX();
+        int y = getY();
+        getWorld().addObject(kaboom, x, y);
         setLocation(40, 35);
-        respawnTimer = 1;
+        respawnTimer = 0;
     }
     
         protected void switchImageLeft()
