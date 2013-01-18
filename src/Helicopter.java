@@ -24,6 +24,7 @@ public class Helicopter extends Actor {
     protected GreenfootImage image2;
     private int actsTillFlicker;
     private int xtest = 0;
+    private String direction;
 
     public Helicopter() {
         speed = 1;
@@ -35,12 +36,8 @@ public class Helicopter extends Actor {
     public void act() {
         if(time+delay[currentIndex]<=System.currentTimeMillis()) {
             nextFrame();
-            
          } 
-      
-            
-        
-        
+
         if (Greenfoot.isKeyDown("w")) move(0, -speed);
         if (Greenfoot.isKeyDown("s")) move(0, +speed);
         if (Greenfoot.isKeyDown("a")) {
@@ -148,14 +145,20 @@ public class Helicopter extends Actor {
         respawnTimer = 0;
     }
     
-        protected void switchImageLeft()
+    protected void switchImageLeft()
     {
-        setImage("helikopter_links.gif");
+        if (direction != "left"){
+            setImage("helikopter_links.gif");
+            direction = "left";
+        }
     }
 
     protected void switchImageRight()
     {
-        setImage("helikopter_rechts.gif");
+        if (direction != "right"){   
+            setImage("helikopter_rechts.gif");
+            direction = "right";
+        }
     }
     
     public boolean atWorldEdge() {   
