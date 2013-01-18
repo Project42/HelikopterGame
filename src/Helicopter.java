@@ -173,13 +173,9 @@ public class Helicopter extends Actor {
     public void addedToWorld(World world)
     {
         setImage("helikopter_rechts.gif");
-        Greenfoot.playSound("kaboem.WAV");
     }
-    private int gifLoop = 0;
-
     
     /** CODE VOOR GIF ANIMATIES */
-    
     
     /** The images used in the animation. */
     private GreenfootImage[] images;
