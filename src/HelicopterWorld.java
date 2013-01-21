@@ -7,7 +7,6 @@ public class HelicopterWorld extends World {
     private Counter scoreCounter;
     private MenuBar menuBar;
     private Background background;
-    private SpeedPowerUp speed1;
     
     public HelicopterWorld() {
         super(80, 80, 10, false);
@@ -43,9 +42,6 @@ public class HelicopterWorld extends World {
         menuBar = new MenuBar();
         addObject(menuBar, 39, 75);
         
-        speed1 = new SpeedPowerUp();
-        addObject(speed1, 20, 40);
-          
         setPaintOrder(Counter.class, Helicopter.class, Victim.class, MenuBar.class, House.class);
     }
 
@@ -56,6 +52,19 @@ public class HelicopterWorld extends World {
             if (actor == scoreCounter) continue;
         
             actor.setLocation(actor.getX() + 40 - helicopter.getX(), actor.getY());
+        }
+        
+        if (Math.random() < 0.008) {
+            Actor powerUp;
+            switch (Greenfoot.getRandomNumber(2)) {
+                case 0: powerUp = new SpeedPowerUp(); break;
+                case 1: powerUp = new RadiusPowerUp(); break;
+                default:
+                    // Will never happen.
+                    assert false;
+                    return;
+            }
+            addObject(powerUp, -50 + Greenfoot.getRandomNumber(100), Greenfoot.getRandomNumber(40));
         }
 
         helicopter.setLocation(40, helicopter.getY());

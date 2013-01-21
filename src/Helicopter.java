@@ -25,9 +25,11 @@ public class Helicopter extends Actor {
     private int xtest = 0;
     private String direction;
     private boolean visibility;
+    private int radius;
 
     public Helicopter() {
         speed = 1;
+        radius = 5;
     }
 
     @Override
@@ -102,13 +104,22 @@ public class Helicopter extends Actor {
             resetLocation();
         }
             
-        Actor victim = getOneObjectAtOffset(0, 0, Victim.class);
-        if (victim != null) {
-            JOptionPane.showMessageDialog(null,"Je hebt iemand gered!");
+        List<Actor> victims = getObjectsInRange(radius, Victim.class);
+        for (Actor victim : victims) {
+            // TODO: Play sound.
             getWorld().removeObject(victim);
         }
         
         consumePowerUp();
+    }
+    
+    public void setRadius(int r) {
+        if (r <= 0) r = 1;
+        radius = r;
+    }
+    
+    public int getRadius() {
+        return radius;
     }
 
     private void move(int dx, int dy) {
