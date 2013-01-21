@@ -110,6 +110,13 @@ public class Helicopter extends Actor {
             getWorld().removeObject(victim);
         }
         
+        Actor wall = getOneObjectAtOffset(-3, 0, Wall.class);
+        
+        if (wall != null && Greenfoot.isKeyDown("a")) {
+            // SPAWN MEER NAAR RECHTS NOG TOEVOEGEN
+            resetLocation();
+        }
+        
         consumePowerUp();
     }
     

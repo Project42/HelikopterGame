@@ -7,11 +7,12 @@ public class HelicopterWorld extends World {
     private Counter scoreCounter;
     private MenuBar menuBar;
     private Background background;
+    private Wall wall;
     
     public HelicopterWorld() {
         super(80, 80, 10, false);
         
-        for (int i = -15; i < 15; ++i) {
+        for (int i = 1; i < 15; ++i) {
             Victim victim;
             int randomvictim = 0 + (int)(Math.random() * ((7 - 0) + 1));
             switch (randomvictim) {
@@ -48,6 +49,9 @@ public class HelicopterWorld extends World {
         
         menuBar = new MenuBar();
         addObject(menuBar, 39, 75);
+        
+        wall = new Wall();
+        addObject(wall, -35, 40);
         
         setPaintOrder(Counter.class, Helicopter.class, Victim.class, MenuBar.class, House.class);
     }
