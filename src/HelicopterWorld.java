@@ -1,25 +1,35 @@
 import greenfoot.*;
 import java.util.List;
+import java.util.ArrayList;
 
 public class HelicopterWorld extends World {
     private Helicopter helicopter;
     private Counter scoreCounter;
     private MenuBar menuBar;
-    private House house1;
-    private House house2;
     private Background background;
     private SpeedPowerUp speed1;
-    private Victim victim1;
-    private Victim victim2;
     
     public HelicopterWorld() {
         super(80, 80, 10, false);
         
-        victim1 = new Victim1();
-        addObject(victim1, 72, 58);
-        
-        victim2 = new Victim2();
-        addObject(victim2, 20, 58);
+        for (int i = -5; i < 5; ++i) {
+            Victim victim;
+            switch (Math.abs(i) % 2) {
+                case 0: victim = new Victim1(); break;
+                case 1: victim = new Victim2(); break;
+                
+                default:
+                    // Will never happen.
+                    assert false;
+                    return;
+            }
+            int x = i * 50 + (-5 + Greenfoot.getRandomNumber(10));
+            
+            addObject(victim, x, 58);
+            
+            House house = new House();
+            addObject(house, x, 65);
+        }
         
         background = new Background();
         addObject(background, 40, 39);
@@ -32,12 +42,6 @@ public class HelicopterWorld extends World {
         
         menuBar = new MenuBar();
         addObject(menuBar, 39, 75);
-        
-        house1 = new House();
-        addObject(house1, 20, 65);
-        
-        house2 = new House();
-        addObject(house2, 75, 65);
         
         speed1 = new SpeedPowerUp();
         addObject(speed1, 20, 40);
