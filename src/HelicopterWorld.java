@@ -8,6 +8,7 @@ public class HelicopterWorld extends World {
     private MenuBar menuBar;
     private Background background;
     private Wall wall;
+    private Direction direction;
     
     public HelicopterWorld() {
         super(80, 80, 10, false);
@@ -43,6 +44,9 @@ public class HelicopterWorld extends World {
         
         helicopter = new Helicopter();
         addObject(helicopter, 40, 35);
+        
+        direction = new Direction();
+        addObject(direction, 20, 68);
         
         scoreCounter = new Counter("Score: ");
         addObject(scoreCounter, 6, 74);
