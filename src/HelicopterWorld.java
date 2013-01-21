@@ -11,11 +11,18 @@ public class HelicopterWorld extends World {
     public HelicopterWorld() {
         super(80, 80, 10, false);
         
-        for (int i = -5; i < 5; ++i) {
+        for (int i = -15; i < 15; ++i) {
             Victim victim;
-            switch (Math.abs(i) % 2) {
+            int randomvictim = 0 + (int)(Math.random() * ((7 - 0) + 1));
+            switch (randomvictim) {
                 case 0: victim = new Victim1(); break;
                 case 1: victim = new Victim2(); break;
+                case 2: victim = new Victim3(); break;
+                case 3: victim = new Victim4(); break;
+                case 4: victim = new Victim5(); break;
+                case 5: victim = new Victim6(); break;
+                case 6: victim = new Victim7(); break;
+                case 7: victim = new Victim8(); break;
                 
                 default:
                     // Will never happen.
