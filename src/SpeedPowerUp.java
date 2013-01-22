@@ -1,6 +1,7 @@
-import greenfoot.*;
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-public class SpeedPowerUp extends Actor implements PowerUp {
+public class SpeedPowerUp extends PowerUps implements PowerUp
+{
     public void apply(Helicopter helicopter) {
         helicopter.increaseSpeed();
     }
