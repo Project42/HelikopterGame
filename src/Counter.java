@@ -7,7 +7,6 @@ public class Counter extends Actor {
     private static final Color textColor = new Color(255, 255, 255);
 
     public int value = 0;
-    public int target = 0;
     private String text;
     private int stringLength;
 
@@ -26,19 +25,9 @@ public class Counter extends Actor {
         updateImage();
     }
 
-    public void act() {
-        if(value < target) {
-            value++;
-            updateImage();
-        }
-        else if(value > target) {
-            value--;
-            updateImage();
-        }
-    }
-
     public void add(int score) {
-        target += score;
+        value += score;
+        updateImage();
     }
 
     public int getValue() {

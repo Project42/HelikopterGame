@@ -107,7 +107,9 @@ public class Helicopter extends Actor {
         List<Actor> victims = getObjectsInRange(radius, Victim.class);
         for (Actor victim : victims) {
             // TODO: Play sound.
-            getWorld().removeObject(victim);
+            HelicopterWorld world = (HelicopterWorld)getWorld();
+            world.addScore(50);
+            world.removeObject(victim);
         }
         
         Actor wall = getOneObjectAtOffset(-3, 0, Wall.class);
@@ -158,6 +160,8 @@ public class Helicopter extends Actor {
         if (newPowerUp == powerUp) return;
         if (powerUp != null) powerUp.remove(this);
         if (newPowerUp != null) {
+            HelicopterWorld world = (HelicopterWorld)getWorld();
+            world.addScore(100);
             powerUp = newPowerUp;
             powerUp.apply(this);
         }

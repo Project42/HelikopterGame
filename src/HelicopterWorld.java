@@ -90,10 +90,13 @@ public class HelicopterWorld extends World {
         scoreCounter.setLocation(6, 74);
         menuBar.setLocation(39, 75);
         background.setLocation(40, 39);
-        scoreCounter.add(1);
     }
     
     public int getWaterLevel() {
         return water.getLevel();
+    }
+    
+    public void addScore(int x) {
+        scoreCounter.add(x);
     }
 }
