@@ -10,9 +10,16 @@ public class HelicopterWorld extends World {
     private Wall wall;
     private Direction direction;
     private Water water;
-
+    private HP hp;
+    private Health health1;
+    private Health health2;
+    private Health health3;
+    private int healthlost;
+    
     public HelicopterWorld() {
         super(80, 80, 10, false);
+        
+        
 
         for (int i = 1; i < 15; ++i) {
             Victim victim;
@@ -60,8 +67,20 @@ public class HelicopterWorld extends World {
 
         water = new Water();
         addObject(water, 40, 70);
+        
+        hp = new HP();
+        addObject(hp, 60, 65);
+        
+        health1 = new Health();
+        addObject(health1, 60, 74);
+        
+        health2 = new Health();
+        addObject(health2, 64, 74);
+        
+        health3 = new Health();
+        addObject(health3, 68, 74);
 
-        setPaintOrder(Counter.class, Helicopter.class, MenuBar.class, Water.class, Victim.class, MenuBar.class, House.class);
+        setPaintOrder(Counter.class, HP.class, Health.class, Helicopter.class, MenuBar.class, Water.class, Victim.class, MenuBar.class, House.class);
     }
 
     @Override
@@ -90,6 +109,10 @@ public class HelicopterWorld extends World {
         scoreCounter.setLocation(6, 74);
         menuBar.setLocation(39, 75);
         background.setLocation(40, 39);
+        health1.setLocation(60, 74);
+        health2.setLocation(64, 74);
+        health3.setLocation(68, 74);
+        hp.setLocation(60,65);
     }
     
     public int getWaterLevel() {
@@ -99,4 +122,14 @@ public class HelicopterWorld extends World {
     public void addScore(int x) {
         scoreCounter.add(x);
     }
+    
+    public void lostLife() {
+        healthlost ++;
+        switch (healthlost) {
+            case 1: removeObject(health1); break;
+            case 2: removeObject(health2); break;
+            case 3: removeObject(health3); break;
+        }
+    }
+    
 }

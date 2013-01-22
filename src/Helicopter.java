@@ -26,6 +26,7 @@ public class Helicopter extends Actor {
     private String direction;
     private boolean visibility;
     private int radius;
+    private int healthlost = 0;
 
     public Helicopter() {
         speed = 1;
@@ -176,6 +177,8 @@ public class Helicopter extends Actor {
         getWorld().addObject(kaboom, x, y);
         setLocation(40, 35);
         respawnTimer = 0;
+        HelicopterWorld world = (HelicopterWorld)getWorld();
+        world.lostLife();
     }
     
     protected void switchImageLeft()
