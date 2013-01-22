@@ -14,6 +14,12 @@ public class PowerUps extends Actor
      */
     public void act() 
     {
-        // Add your action code here.
+        Actor wallcheck = getOneObjectAtOffset(0, 0, Wall.class);
+        
+        Helicopter helicopter = new Helicopter();
+        
+        if (wallcheck != null) {
+            getWorld().removeObject(this);
+        }
     }    
 }
