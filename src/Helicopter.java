@@ -117,6 +117,11 @@ public class Helicopter extends Actor {
             resetLocation();
         }
         
+        int waterOffset = 70 - ((HelicopterWorld)getWorld()).getWaterLevel() / 2 / 10;
+        if (waterOffset <= getY()) {
+            resetLocation();
+        }
+        
         consumePowerUp();
     }
     

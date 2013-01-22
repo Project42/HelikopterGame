@@ -59,9 +59,9 @@ public class HelicopterWorld extends World {
         addObject(wall, -35, 40);
 
         water = new Water();
-        addObject(water, 40, 70);
+        addObject(water, -1, 70);
 
-        setPaintOrder(Counter.class, Helicopter.class, MenuBar.class, Water.class, Victim.class, MenuBar.class, House.class);
+        setPaintOrder(Counter.class, Helicopter.class, Victim.class, MenuBar.class, House.class);
     }
 
     @Override
@@ -73,7 +73,7 @@ public class HelicopterWorld extends World {
             actor.setLocation(actor.getX() + 40 - helicopter.getX(), actor.getY());
         }
 
-        if (Math.random() < 0.003) {
+        if (Math.random() < 0.008) {
             Actor powerUp;
             switch (Greenfoot.getRandomNumber(2)) {
                 case 0: powerUp = new SpeedPowerUp(); break;
@@ -91,9 +91,5 @@ public class HelicopterWorld extends World {
         menuBar.setLocation(39, 75);
         background.setLocation(40, 39);
         scoreCounter.add(1);
-    }
-    
-    public int getWaterLevel() {
-        return water.getLevel();
     }
 }
