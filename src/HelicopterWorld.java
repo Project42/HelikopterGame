@@ -1,6 +1,7 @@
 import greenfoot.*;
 import java.util.List;
 import java.util.ArrayList;
+import javax.swing.*;
 
 public class HelicopterWorld extends World {
     private Helicopter helicopter;
@@ -126,7 +127,10 @@ public class HelicopterWorld extends World {
         switch (healthlost) {
             case 1: removeObject(health1); break;
             case 2: removeObject(health2); break;
-            case 3: removeObject(health3); break;
+            case 3: removeObject(health3); 
+            JOptionPane.showMessageDialog(null, "GAME OVER PROCES HIER"); 
+            Greenfoot.stop(); 
+            break;
         }
     }
     

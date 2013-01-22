@@ -116,8 +116,7 @@ public class Helicopter extends Actor {
         Actor wall = getOneObjectAtOffset(-3, 0, Wall.class);
         
         if (wall != null && Greenfoot.isKeyDown("a")) {
-            // SPAWN MEER NAAR RECHTS NOG TOEVOEGEN
-            resetLocation();
+            resetLocationWall();
         }
         
         int waterOffset = 70 - ((HelicopterWorld)getWorld()).getWaterLevel() / 2 / 10;
@@ -176,6 +175,18 @@ public class Helicopter extends Actor {
         int y = getY();
         getWorld().addObject(kaboom, x, y);
         setLocation(40, 35);
+        respawnTimer = 0;
+        HelicopterWorld world = (HelicopterWorld)getWorld();
+        world.lostLife();
+    }
+    
+    private void resetLocationWall() {
+        speed = 0;
+        Kaboom kaboom = new Kaboom();
+        int x = getX();
+        int y = getY();
+        getWorld().addObject(kaboom, x, y);
+        setLocation(50, 35);
         respawnTimer = 0;
         HelicopterWorld world = (HelicopterWorld)getWorld();
         world.lostLife();
