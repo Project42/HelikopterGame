@@ -18,8 +18,6 @@ public class HelicopterWorld extends World {
     
     public HelicopterWorld() {
         super(80, 80, 10, false);
-        
-        
 
         for (int i = 1; i < 15; ++i) {
             Victim victim;
@@ -79,8 +77,8 @@ public class HelicopterWorld extends World {
         
         health3 = new Health();
         addObject(health3, 68, 74);
-
-        setPaintOrder(Counter.class, HP.class, Health.class, Helicopter.class, MenuBar.class, Water.class, Victim.class, MenuBar.class, House.class);
+        
+        setPaintOrder(Counter.class, HP.class, Health.class, Helicopter.class, MenuBar.class, Wall.class, Water.class, Victim.class, MenuBar.class, House.class, SpeedPowerUp.class, RadiusPowerUp.class);
     }
 
     @Override
