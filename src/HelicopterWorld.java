@@ -1,4 +1,5 @@
 import greenfoot.*;
+import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 import javax.swing.*;
@@ -127,11 +128,20 @@ public class HelicopterWorld extends World {
         switch (healthlost) {
             case 1: removeObject(health1); break;
             case 2: removeObject(health2); break;
-            case 3: removeObject(health3); 
-            JOptionPane.showMessageDialog(null, "GAME OVER PROCES HIER"); 
-            Greenfoot.stop(); 
-            break;
+            case 3:
+                removeObject(health3);
+                gameOver();
+                break;
         }
     }
     
+    private void gameOver() {
+        HighScore highScore = HighScore.askName(scoreCounter.getValue());
+        try {
+            highScore.save(HighScore.defaultFilenameForGame(Game.HELICOPTER_GAME));
+            Greenfoot.setWorld(new GameOverWorld(Game.HELICOPTER_GAME));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
