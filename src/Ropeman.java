@@ -30,8 +30,8 @@ public class Ropeman extends Actor
             world.removeObject(victim);
         }
         
-        Actor watercheck = getOneObjectAtOffset(0, 0, Water.class);
-        if (watercheck != null) {
+        int waterOffset = 70 - ((HelicopterWorld)getWorld()).getWaterLevel() / 2 / 10;
+        if (waterOffset <= getY()) {
             resetRopeman();
         }
     }    
