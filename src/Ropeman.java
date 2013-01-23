@@ -29,6 +29,11 @@ public class Ropeman extends Actor
             world.addScore(50);
             world.removeObject(victim);
         }
+        
+        Actor watercheck = getOneObjectAtOffset(0, 0, Water.class);
+        if (watercheck != null) {
+            resetRopeman();
+        }
     }    
     
     public void setRadius(int r) {
@@ -38,6 +43,12 @@ public class Ropeman extends Actor
     
     public int getRadius() {
         return radius;
+    }
+    
+    public void resetRopeman() {
+        HelicopterWorld world = (HelicopterWorld)getWorld();
+        getWorld().removeObject(this);
+        world.lostLifeRope();
     }
     
 }

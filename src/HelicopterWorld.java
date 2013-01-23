@@ -20,6 +20,7 @@ public class HelicopterWorld extends World {
     private Health2 health5;
     private Health2 health6;
     private int healthlost;
+    private int healthlostrope;
     
     public HelicopterWorld() {
         super(80, 80, 10, false);
@@ -147,6 +148,18 @@ public class HelicopterWorld extends World {
             case 2: removeObject(health2); break;
             case 3:
                 removeObject(health3);
+                gameOver();
+                break;
+        }
+    }
+    
+    public void lostLifeRope() {
+        healthlostrope ++;
+        switch (healthlostrope) {
+            case 1: removeObject(health4); break;
+            case 2: removeObject(health5); break;
+            case 3:
+                removeObject(health6);
                 gameOver();
                 break;
         }
