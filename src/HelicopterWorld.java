@@ -21,13 +21,32 @@ public class HelicopterWorld extends World {
     private Health2 health6;
     private int healthlost;
     private int healthlostrope;
+    private Victim victim;
+    private House house;
     
     public HelicopterWorld() {
         super(80, 80, 10, false);
 
         for (int i = 1; i < 15; ++i) {
             Victim victim;
+            House house;
+            int yvictim = 58;
+            int yhouse = 65;
+            int x = i * 50 + (-5 + Greenfoot.getRandomNumber(10));
+            int randomhouse = (int)(Math.random() * ((2 - 0) + 1));
             int randomvictim = 0 + (int)(Math.random() * ((7 - 0) + 1));
+            switch (randomhouse) {
+                case 0: house = new House1(); break;
+                case 1: house = new House2(); yvictim -= 4; yhouse -= 2; break;
+                case 2: house = new House3(); yvictim -= 2; yhouse -= 1; break;
+                
+                default:
+                    // Will never happen.
+                    assert false;
+                    return;
+            }
+            addObject(house, x, yhouse);
+            
             switch (randomvictim) {
                 case 0: victim = new Victim1(); break;
                 case 1: victim = new Victim2(); break;
@@ -43,12 +62,8 @@ public class HelicopterWorld extends World {
                     assert false;
                     return;
             }
-            int x = i * 50 + (-5 + Greenfoot.getRandomNumber(10));
-
-            addObject(victim, x, 58);
-
-            House house = new House();
-            addObject(house, x, 65);
+            addObject(victim, x, yvictim);
+                
         }
 
         background = new Background();
@@ -92,7 +107,6 @@ public class HelicopterWorld extends World {
         
         health6 = new Health2();
         addObject(health6, 68, 77);
-        
         
         
         setPaintOrder(Counter.class, HP.class, Health2.class, Health.class, Helicopter.class, MenuBar.class, Wall.class, Water.class, Victim.class, MenuBar.class, House.class, SpeedPowerUp.class, RadiusPowerUp.class);
@@ -167,5 +181,9 @@ public class HelicopterWorld extends World {
     
     private void gameOver() {
         Greenfoot.setWorld(new GameOverWorld(Game.HELICOPTER_GAME, scoreCounter.getValue()));
+    }
+    
+    public void pickUpVictim(int x, int y) {
+        
     }
 }

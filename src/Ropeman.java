@@ -27,7 +27,9 @@ public class Ropeman extends Actor
             // TODO: Play sound.
             HelicopterWorld world = (HelicopterWorld)getWorld();
             world.addScore(50);
-            world.removeObject(victim);
+            int x = getX();
+            int y = getY();
+            world.pickUpVictim(x,y); // MOET NOG WORDEN GEMAAKT
         }
         
         int waterOffset = 70 - ((HelicopterWorld)getWorld()).getWaterLevel() / 2 / 10;
