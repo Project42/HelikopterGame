@@ -244,7 +244,7 @@ public class Helicopter extends Actor {
         int x = getX();
         int y = getY();
         getWorld().addObject(kaboom, x, y);
-        setLocation(40, 35);
+        setLocation(40, 10);
         respawnTimer = 0;
         HelicopterWorld world = (HelicopterWorld)getWorld();
         world.lostLife();
