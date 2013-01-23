@@ -136,12 +136,6 @@ public class HelicopterWorld extends World {
     }
     
     private void gameOver() {
-        HighScore highScore = HighScore.askName(scoreCounter.getValue());
-        try {
-            highScore.save(HighScore.defaultFilenameForGame(Game.HELICOPTER_GAME));
-            Greenfoot.setWorld(new GameOverWorld(Game.HELICOPTER_GAME));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Greenfoot.setWorld(new GameOverWorld(Game.HELICOPTER_GAME, scoreCounter.getValue()));
     }
 }
