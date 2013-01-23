@@ -27,13 +27,13 @@ public class HelicopterWorld extends World {
     public HelicopterWorld() {
         super(80, 80, 10, false);
 
-        for (int i = 1; i < 15; ++i) {
+        for (int i = 1; i < 50; ++i) {
             Victim victim;
             House house;
             int yvictim = 58;
             int yhouse = 65;
             int x = i * 50 + (-5 + Greenfoot.getRandomNumber(10));
-            int randomhouse = (int)(Math.random() * ((5 - 0) + 1));
+            int randomhouse = (int)(Math.random() * ((7 - 0) + 1));
             int randomvictim = 0 + (int)(Math.random() * ((7 - 0) + 1));
             switch (randomhouse) {
                 case 0: house = new House1(); break;
@@ -42,6 +42,8 @@ public class HelicopterWorld extends World {
                 case 3: house = new House4(); yvictim -= 37; yhouse -= 19; break;
                 case 4: house = new House5(); yvictim -= 32; yhouse -= 16; break;
                 case 5: house = new House6(); yvictim -= 26; yhouse -= 13; break;
+                case 6: house = new House7(); yvictim -= 8; yhouse -= 4; break;
+                case 7: house = new House8(); yvictim -= 10; yhouse -= 5; break;
                 
                 default:
                     // Will never happen.
