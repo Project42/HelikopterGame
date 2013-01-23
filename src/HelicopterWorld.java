@@ -16,6 +16,9 @@ public class HelicopterWorld extends World {
     private Health health1;
     private Health health2;
     private Health health3;
+    private Health2 health4;
+    private Health2 health5;
+    private Health2 health6;
     private int healthlost;
     
     public HelicopterWorld() {
@@ -57,7 +60,7 @@ public class HelicopterWorld extends World {
         addObject(direction, 20, 68);
 
         scoreCounter = new Counter("Score: ");
-        addObject(scoreCounter, 6, 74);
+        addObject(scoreCounter, 6, 73);
 
         menuBar = new MenuBar();
         addObject(menuBar, 39, 75);
@@ -69,19 +72,29 @@ public class HelicopterWorld extends World {
         addObject(water, 40, 70);
         
         hp = new HP();
-        addObject(hp, 60, 65);
+        addObject(hp, 60, 64);
         
         health1 = new Health();
-        addObject(health1, 60, 74);
+        addObject(health1, 60, 73);
         
         health2 = new Health();
-        addObject(health2, 64, 74);
+        addObject(health2, 64, 73);
         
         health3 = new Health();
-        addObject(health3, 68, 74);
+        addObject(health3, 68, 73);
+        
+        health4 = new Health2();
+        addObject(health4, 60, 77);
+        
+        health5 = new Health2();
+        addObject(health5, 64, 77);
+        
+        health6 = new Health2();
+        addObject(health6, 68, 77);
         
         
-        setPaintOrder(Counter.class, HP.class, Health.class, Helicopter.class, MenuBar.class, Wall.class, Water.class, Victim.class, MenuBar.class, House.class, SpeedPowerUp.class, RadiusPowerUp.class);
+        
+        setPaintOrder(Counter.class, HP.class, Health2.class, Health.class, Helicopter.class, MenuBar.class, Wall.class, Water.class, Victim.class, MenuBar.class, House.class, SpeedPowerUp.class, RadiusPowerUp.class);
     }
 
     @Override
@@ -107,13 +120,16 @@ public class HelicopterWorld extends World {
         }
 
         helicopter.setLocation(40, helicopter.getY());
-        scoreCounter.setLocation(6, 74);
+        scoreCounter.setLocation(6, 73);
         menuBar.setLocation(39, 75);
         background.setLocation(40, 39);
-        health1.setLocation(60, 74);
-        health2.setLocation(64, 74);
-        health3.setLocation(68, 74);
-        hp.setLocation(60,65);
+        health1.setLocation(60, 73);
+        health2.setLocation(64, 73);
+        health3.setLocation(68, 73);
+        health4.setLocation(60, 77);
+        health5.setLocation(64, 77);
+        health6.setLocation(68, 77);
+        hp.setLocation(60,64);
     }
     
     public int getWaterLevel() {
