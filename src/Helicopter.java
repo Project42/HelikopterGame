@@ -27,10 +27,23 @@ public class Helicopter extends Actor {
     private boolean visibility;
     private int radius;
     private int healthlost = 0;
+    
+    private int ropelength;
+    private Rope rope;
+    private Rope rope2;
+    private Rope rope3;
+    private Rope rope4;
+    private Ropeman ropeman;
 
     public Helicopter() {
         speed = 1;
         radius = 5;
+        
+        rope = new Rope();
+        rope2 = new Rope();
+        rope3 = new Rope();
+        rope4 = new Rope();
+        ropeman = new Ropeman();
     }
 
     @Override
@@ -48,6 +61,20 @@ public class Helicopter extends Actor {
         if (Greenfoot.isKeyDown("d")) {
             move(+speed, 0); 
             switchImageRight();
+        }
+        
+        if (Greenfoot.isKeyDown("down")) {
+            HelicopterWorld world = (HelicopterWorld)getWorld();
+            int x = getX();
+            int y = getY();
+            increaseRope(x, y);
+        }
+        
+        if (Greenfoot.isKeyDown("up")) {
+            HelicopterWorld world = (HelicopterWorld)getWorld();
+            int x = getX();
+            int y = getY();
+            decreaseRope(x, y);
         }
         
         if (atWorldEdge() == true)    
@@ -104,14 +131,6 @@ public class Helicopter extends Actor {
         if (houseboven != null && Greenfoot.isKeyDown("s")) {
             resetLocation();
         }
-            
-        List<Actor> victims = getObjectsInRange(radius, Victim.class);
-        for (Actor victim : victims) {
-            // TODO: Play sound.
-            HelicopterWorld world = (HelicopterWorld)getWorld();
-            world.addScore(50);
-            world.removeObject(victim);
-        }
         
         Actor wall = getOneObjectAtOffset(-3, 0, Wall.class);
         
@@ -122,6 +141,31 @@ public class Helicopter extends Actor {
         int waterOffset = 70 - ((HelicopterWorld)getWorld()).getWaterLevel() / 2 / 10;
         if (waterOffset <= getY()) {
             resetLocation();
+        }
+        
+        if (ropelength > 0) {
+            int x = getX()+1;
+            int y = getY()+2;
+            rope.setLocation(x,y);
+            ropeman.setLocation(x,y+3);
+        }
+        if (ropelength > 49) {
+            int x = getX()+1;
+            int y = getY()+2;
+            rope2.setLocation(x,y+2);
+            ropeman.setLocation(x,y+5);
+        }
+        if (ropelength > 99) {
+            int x = getX()+1;
+            int y = getY()+2;
+            rope3.setLocation(x,y+4);
+            ropeman.setLocation(x,y+7);
+        }
+        if (ropelength > 149) {
+            int x = getX()+1;
+            int y = getY()+2;
+            rope4.setLocation(x,y+6);
+            ropeman.setLocation(x,y+9);
         }
         
         consumePowerUp();
@@ -138,6 +182,32 @@ public class Helicopter extends Actor {
 
     private void move(int dx, int dy) {
         setLocation(getX() + dx, getY() + dy);
+    }
+    
+    public void increaseRope(int x , int y) {
+        ropelength ++;
+        x += 1;
+        y += 2;
+        switch (ropelength) {
+            case 1: getWorld().addObject(rope, x, y); getWorld().addObject(ropeman, x, y+3); break;
+            case 50: y+= 2; getWorld().addObject(rope2, x, y); ropeman.setLocation(x, y+3); break;
+            case 100: y+= 4; getWorld().addObject(rope3, x, y); ropeman.setLocation(x, y+3); break;
+            case 150: y+= 6; getWorld().addObject(rope4, x, y); ropeman.setLocation(x, y+3); break;
+        }
+    }
+    
+    public void decreaseRope(int x, int y) {
+        if (ropelength > -1) {
+            ropelength --;
+        }
+        x += 1;
+        y -= 2;
+        switch (ropelength) {
+            case 149: getWorld().removeObject(rope4); ropeman.setLocation(x, y+11); break;
+            case 99: getWorld().removeObject(rope3); ropeman.setLocation(x, y+9); break;
+            case 49: getWorld().removeObject(rope2); ropeman.setLocation(x, y+7); break;
+            case 0: getWorld().removeObject(rope); getWorld().removeObject(ropeman); break;
+        }
     }
 
     public void increaseSpeed() {

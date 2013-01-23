@@ -49,7 +49,7 @@ public class HelicopterWorld extends World {
 
         background = new Background();
         addObject(background, 40, 39);
-
+        
         helicopter = new Helicopter();
         addObject(helicopter, 40, 35);
 
@@ -79,6 +79,7 @@ public class HelicopterWorld extends World {
         
         health3 = new Health();
         addObject(health3, 68, 74);
+        
         
         setPaintOrder(Counter.class, HP.class, Health.class, Helicopter.class, MenuBar.class, Wall.class, Water.class, Victim.class, MenuBar.class, House.class, SpeedPowerUp.class, RadiusPowerUp.class);
     }
