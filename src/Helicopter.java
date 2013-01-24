@@ -201,7 +201,9 @@ public class Helicopter extends Actor {
     }
     
     public void increaseRope(int x , int y) {
-        ropelength ++;
+        if (ropelength < 250){
+            ropelength ++;
+        }
         x += 1;
         y += 2;
         switch (ropelength) {
