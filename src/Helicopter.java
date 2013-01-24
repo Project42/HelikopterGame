@@ -91,20 +91,20 @@ public class Helicopter extends Actor {
         }
         
         if (--respawnTimer <= 0) {
-            if (xtest < 6) {
+            if (xtest < 7) {
                 if (--actsTillFlicker <= 0) {
                      if (!visibility) {
-                         setImage("helikopter_links.gif");
+                         setImage("helikopter_rechts.gif");
                          visibility = true;
                      } else {
-                         setImage("helikopter_rechts.gif");
+                         setImage("niets.gif");
                          visibility = false;
                      }
                      actsTillFlicker = 50;
                      xtest++;
                 }
             }
-            else if (xtest == 6) {
+            else if (xtest == 7) {
                 respawnTimer = 10000000;
                 speed = 1;
                 xtest = 0;
@@ -267,7 +267,7 @@ public class Helicopter extends Actor {
         int y = getY();
         getWorld().addObject(kaboom, x, y);
         setLocation(40, 10);
-        respawnTimer = 0;
+        respawnTimer = 10;
         HelicopterWorld world = (HelicopterWorld)getWorld();
         world.lostLife();
     }
@@ -278,7 +278,7 @@ public class Helicopter extends Actor {
         int x = getX();
         int y = getY();
         getWorld().addObject(kaboom, x, y);
-        setLocation(50, 35);
+        setLocation(50, 10);
         respawnTimer = 0;
         HelicopterWorld world = (HelicopterWorld)getWorld();
         world.lostLife();
@@ -286,7 +286,7 @@ public class Helicopter extends Actor {
     
     protected void switchImageLeft()
     {
-        if (direction != "left"){
+        if (direction != "left" && xtest < 1){
             setImage("helikopter_links.gif");
             direction = "left";
         }
@@ -294,7 +294,7 @@ public class Helicopter extends Actor {
 
     protected void switchImageRight()
     {
-        if (direction != "right"){   
+        if (direction != "right" && xtest < 1){   
             setImage("helikopter_rechts.gif");
             direction = "right";
         }
@@ -336,6 +336,7 @@ public class Helicopter extends Actor {
     {
         this.file = file;
         if(file.endsWith(".gif")) {
+            currentIndex = 0;
             loadImages();
             setImage(images[0]);
         }
