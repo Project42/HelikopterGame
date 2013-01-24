@@ -28,7 +28,7 @@ public class HelicopterWorld extends World {
     public HelicopterWorld() {
         super(80, 80, 10, false);
 
-        for (int i = 1; i < 50; ++i) {
+        for (int i = 1; i < 100; ++i) {
             Victim victim;
             House house;
             int yvictim = 58;
