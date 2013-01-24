@@ -24,10 +24,11 @@ public class HelicopterWorld extends World {
     private Victim victim;
     private House house;
     private NeedsHelp needshelp;
+    GreenfootSound backgroundMusic = new GreenfootSound("background_music.mp3");
     
     public HelicopterWorld() {
         super(80, 80, 10, false);
-
+        backgroundMusic.playLoop();
         for (int i = 1; i < 100; ++i) {
             Victim victim;
             House house;
