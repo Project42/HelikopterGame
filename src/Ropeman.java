@@ -38,7 +38,7 @@ public class Ropeman extends Actor
         
         Actor houselinks = getOneObjectAtOffset(1, 0, House.class);
         Actor houserechts = getOneObjectAtOffset(-2, 0, House.class);
-        Actor houseboven = getOneObjectAtOffset(0, 2, House.class);
+        Actor houseboven = getOneObjectAtOffset(0, 3, House.class);
         
         if (houselinks != null && Greenfoot.isKeyDown("d")) {
             resetRopeman();

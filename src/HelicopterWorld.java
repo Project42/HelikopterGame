@@ -23,6 +23,7 @@ public class HelicopterWorld extends World {
     private int healthlostrope;
     private Victim victim;
     private House house;
+    private NeedsHelp needshelp;
     
     public HelicopterWorld() {
         super(80, 80, 10, false);
@@ -33,7 +34,7 @@ public class HelicopterWorld extends World {
             int yvictim = 58;
             int yhouse = 65;
             int x = i * 50 + (-5 + Greenfoot.getRandomNumber(10));
-            int randomhouse = (int)(Math.random() * ((7 - 0) + 1));
+            int randomhouse = (int)(Math.random() * ((9 - 0) + 1));
             int randomvictim = 0 + (int)(Math.random() * ((7 - 0) + 1));
             switch (randomhouse) {
                 case 0: house = new House1(); break;
@@ -44,6 +45,8 @@ public class HelicopterWorld extends World {
                 case 5: house = new House6(); yvictim -= 26; yhouse -= 13; break;
                 case 6: house = new House7(); yvictim -= 8; yhouse -= 4; break;
                 case 7: house = new House8(); yvictim -= 10; yhouse -= 5; break;
+                case 8: house = new House9(); yvictim -= 22; yhouse -= 11; break;
+                case 9: house = new House10(); yvictim -= 22; yhouse -= 11; break;
                 
                 default:
                     // Will never happen.
@@ -68,6 +71,9 @@ public class HelicopterWorld extends World {
                     return;
             }
             addObject(victim, x, yvictim);
+            
+            needshelp = new NeedsHelp();
+            addObject(needshelp, x, yvictim-4);
                 
         }
 
@@ -113,7 +119,7 @@ public class HelicopterWorld extends World {
         health6 = new Health2();
         addObject(health6, 68, 77);
 
-        setPaintOrder(Counter.class, HP.class, Health2.class, Health.class, Helicopter.class, MenuBar.class, Wall.class, Water.class, Victim.class, MenuBar.class, House.class, SpeedPowerUp.class, RadiusPowerUp.class);
+        setPaintOrder(Counter.class, HP.class, Health2.class, Health.class, Helicopter.class, MenuBar.class, Wall.class, Water.class, Victim.class, MenuBar.class, House.class, SpeedPowerUp.class, RadiusPowerUp.class, NeedsHelp.class);
     }
 
     @Override
@@ -149,6 +155,10 @@ public class HelicopterWorld extends World {
         health5.setLocation(64, 77);
         health6.setLocation(68, 77);
         hp.setLocation(60,64);
+        
+        if (getObjects(Victim.class).size() == 0) {
+            gameOver();
+        }
     }
     
     public int getWaterLevel() {

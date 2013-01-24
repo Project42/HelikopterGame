@@ -1,5 +1,4 @@
 import greenfoot.*;
-import javax.swing.*;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,308 +13,26 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 import java.util.ArrayList;
-import javax.swing.*;
-
-public class Helicopter extends Actor {
-    private int speed;
-    private PowerUp powerUp;
-    private int powerUpActsRemaining;
-    public int respawnTimer = 1000000000;
-    private int actsTillFlicker;
-    private int xtest = 0;
-    private String direction;
-    private boolean visibility;
-    private int radius;
-    private int healthlost = 0;
-    
-    private int ropelength;
-    private Rope rope;
-    private Rope rope2;
-    private Rope rope3;
-    private Rope rope4;
-    private Rope rope5;
-    private Rope rope6;
-    private Ropeman ropeman;
-
-    public Helicopter() {
-        speed = 1;
-        radius = 5;
-        
-        rope = new Rope();
-        rope2 = new Rope();
-        rope3 = new Rope();
-        rope4 = new Rope();
-        rope5 = new Rope();
-        rope6 = new Rope();
-        ropeman = new Ropeman();
-    }
-
-    @Override
-    public void act() {
-        if(time+delay[currentIndex]<=System.currentTimeMillis()) {
-            nextFrame();
-         } 
-
-        if (Greenfoot.isKeyDown("w")) move(0, -speed);
-        if (Greenfoot.isKeyDown("s")) move(0, +speed);
-        if (Greenfoot.isKeyDown("a")) {
-            move(-speed, 0); 
-            switchImageLeft();
-        }
-        if (Greenfoot.isKeyDown("d")) {
-            move(+speed, 0); 
-            switchImageRight();
-        }
-        
-        if (Greenfoot.isKeyDown("down")) {
-            HelicopterWorld world = (HelicopterWorld)getWorld();
-            int x = getX();
-            int y = getY();
-            increaseRope(x, y);
-        }
-        
-        if (Greenfoot.isKeyDown("up")) {
-            HelicopterWorld world = (HelicopterWorld)getWorld();
-            int x = getX();
-            int y = getY();
-            decreaseRope(x, y);
-        }
-        
-        if (atWorldEdge() == true)    
-        {    
-           resetLocation();
-        }   
-        
-        if (--powerUpActsRemaining <= 0) {
-            setPowerUp(null);
-        }
-        
-        if (--respawnTimer <= 0) {
-            if (xtest < 7) {
-                if (--actsTillFlicker <= 0) {
-                     if (!visibility) {
-                         setImage("helikopter_rechts.gif");
-                         visibility = true;
-                     } else {
-                         setImage("niets.gif");
-                         visibility = false;
-                     }
-                     actsTillFlicker = 50;
-                     xtest++;
-                }
-            }
-            else if (xtest == 7) {
-                respawnTimer = 10000000;
-                setImage("helikopter_rechts.gif");
-                speed = 1;
-                xtest = 0;
-            }
-     
-        }
-        
-        Actor menubar = getOneObjectAtOffset(0, 1, MenuBar.class);
-        if (menubar != null) {
-            move(0, -1);
-            if (powerUpActsRemaining > 0) {
-                move(0, -1);
-            }
-        }
-        
-        Actor houselinks = getOneObjectAtOffset(1, 0, House.class);
-        Actor houserechts = getOneObjectAtOffset(-2, 0, House.class);
-        Actor houseboven = getOneObjectAtOffset(0, 1, House.class);
-        
-        if (houselinks != null && Greenfoot.isKeyDown("d")) {
-            resetLocation();
-        }
-        
-        if (houserechts != null && Greenfoot.isKeyDown("a")) {
-            resetLocation();
-        }
-        
-        if (houseboven != null && Greenfoot.isKeyDown("s")) {
-            resetLocation();
-        }
-        
-        Actor wall = getOneObjectAtOffset(-3, 0, Wall.class);
-        
-        if (wall != null && Greenfoot.isKeyDown("a")) {
-            resetLocationWall();
-        }
-        
-        int waterOffset = 70 - ((HelicopterWorld)getWorld()).getWaterLevel() / 2 / 10;
-        if (waterOffset <= getY()) {
-            resetLocation();
-        }
-        
-        if (ropelength > 0) {
-            int x = getX()+1;
-            int y = getY()+2;
-            rope.setLocation(x,y);
-            ropeman.setLocation(x,y+3);
-        }
-        if (ropelength > 49) {
-            int x = getX()+1;
-            int y = getY()+2;
-            rope2.setLocation(x,y+2);
-            ropeman.setLocation(x,y+5);
-        }
-        if (ropelength > 99) {
-            int x = getX()+1;
-            int y = getY()+2;
-            rope3.setLocation(x,y+4);
-            ropeman.setLocation(x,y+7);
-        }
-        if (ropelength > 149) {
-            int x = getX()+1;
-            int y = getY()+2;
-            rope4.setLocation(x,y+6);
-            ropeman.setLocation(x,y+9);
-        }
-        if (ropelength > 199) {
-            int x = getX()+1;
-            int y = getY()+2;
-            rope5.setLocation(x,y+8);
-            ropeman.setLocation(x,y+11);
-        }
-        if (ropelength > 249) {
-            int x = getX()+1;
-            int y = getY()+2;
-            rope6.setLocation(x,y+10);
-            ropeman.setLocation(x,y+13);
-        }
-        
-        consumePowerUp();
-    }
-    
-    public void setRadius(int r) {
-        if (r <= 0) r = 1;
-        radius = r;
-    }
-    
-    public int getRadius() {
-        return radius;
-    }
-
-    private void move(int dx, int dy) {
-        setLocation(getX() + dx, getY() + dy);
-    }
-    
-    public void increaseRope(int x , int y) {
-        if (ropelength < 250){
-            ropelength ++;
-        }
-        x += 1;
-        y += 2;
-        switch (ropelength) {
-            case 1: getWorld().addObject(rope, x, y); getWorld().addObject(ropeman, x, y+3); break;
-            case 50: y+= 2; getWorld().addObject(rope2, x, y); ropeman.setLocation(x, y+3); break;
-            case 100: y+= 4; getWorld().addObject(rope3, x, y); ropeman.setLocation(x, y+3); break;
-            case 150: y+= 6; getWorld().addObject(rope4, x, y); ropeman.setLocation(x, y+3); break;
-            case 200: y+= 8; getWorld().addObject(rope5, x, y); ropeman.setLocation(x, y+3); break;
-            case 250: y+= 10; getWorld().addObject(rope6, x, y); ropeman.setLocation(x, y+3); break;
-        }
-    }
-    
-    public void decreaseRope(int x, int y) {
-        if (ropelength > -1) {
-            ropelength --;
-        }
-        x += 1;
-        y -= 2;
-        switch (ropelength) {
-            case 249: getWorld().removeObject(rope6); ropeman.setLocation(x, y+15); break;
-            case 199: getWorld().removeObject(rope5); ropeman.setLocation(x, y+13); break;
-            case 149: getWorld().removeObject(rope4); ropeman.setLocation(x, y+11); break;
-            case 99: getWorld().removeObject(rope3); ropeman.setLocation(x, y+9); break;
-            case 49: getWorld().removeObject(rope2); ropeman.setLocation(x, y+7); break;
-            case 0: getWorld().removeObject(rope); getWorld().removeObject(ropeman); break;
-        }
-    }
-
-    public void increaseSpeed() {
-        speed = 2;
-    }
-
-    public void decreaseSpeed() {
-        speed = 1;
-    }
-
-    private void consumePowerUp() {
-        Actor newPowerUp = (Actor)getOneIntersectingObject(PowerUp.class);
-        if (newPowerUp != null) {
-            setPowerUp((PowerUp)newPowerUp);
-            newPowerUp.getWorld().removeObject(newPowerUp);
-        }
-    }
-
-    private void setPowerUp(PowerUp newPowerUp) {
-        if (newPowerUp == powerUp) return;
-        if (powerUp != null) powerUp.remove(this);
-        if (newPowerUp != null) {
-            HelicopterWorld world = (HelicopterWorld)getWorld();
-            world.addScore(100);
-            powerUp = newPowerUp;
-            powerUp.apply(this);
-        }
-        powerUpActsRemaining = 1000;
-    }
-    
-    private void resetLocation() {
-        speed = 0;
-        Kaboom kaboom = new Kaboom();
-        int x = getX();
-        int y = getY();
-        getWorld().addObject(kaboom, x, y);
-        setLocation(40, 10);
-        respawnTimer = 10;
-        HelicopterWorld world = (HelicopterWorld)getWorld();
-        world.lostLife();
-    }
-    
-    private void resetLocationWall() {
-        speed = 0;
-        Kaboom kaboom = new Kaboom();
-        int x = getX();
-        int y = getY();
-        getWorld().addObject(kaboom, x, y);
-        setLocation(50, 10);
-        respawnTimer = 0;
-        HelicopterWorld world = (HelicopterWorld)getWorld();
-        world.lostLife();
-    }
-    
-    protected void switchImageLeft()
-    {
-        if (direction != "left" && xtest < 1){
-            setImage("helikopter_links.gif");
-            direction = "left";
-        }
-    }
-
-    protected void switchImageRight()
-    {
-        if (direction != "right" && xtest < 1){   
-            setImage("helikopter_rechts.gif");
-            direction = "right";
-        }
-    }
-    
-    public boolean atWorldEdge() {   
-        if (getY() == 0) {  
-            return true;
-        } 
-        else {  
-            return false;  
-        }  
-    }  
-    
+/**
+ * Write a description of class NeedsHelp here.
+ * 
+ * @author (your name) 
+ * @version (a version number or a date)
+ */
+public class NeedsHelp extends Actor
+{
+    /**
+     * Act - do whatever the NeedsHelp wants to do. This method is called whenever
+     * the 'Act' or 'Run' button gets pressed in the environment.
+     */
     public void addedToWorld(World world)
     {
-        setImage("helikopter_rechts.gif");
+        setImage("uitroepteken.gif");
     }
+
     
     /** CODE VOOR GIF ANIMATIES */
+    
     
     /** The images used in the animation. */
     private GreenfootImage[] images;
@@ -337,7 +54,6 @@ public class Helicopter extends Actor {
     {
         this.file = file;
         if(file.endsWith(".gif")) {
-            currentIndex = 0;
             loadImages();
             setImage(images[0]);
         }
@@ -362,7 +78,17 @@ public class Helicopter extends Actor {
     /**
      * Move onto the next frame if the time for the current frame has expired.
      */
- 
+    public void act()
+    {
+        if(time+delay[currentIndex]<=System.currentTimeMillis()) 
+        {
+            nextFrame();
+        }
+        
+        if (getObjectsInRange(5, Victim.class).isEmpty()) {
+            getWorld().removeObject(this);
+        }
+    }
     
     /**
      * Advance to the next frame in the animation.
