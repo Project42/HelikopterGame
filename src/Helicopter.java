@@ -27,7 +27,6 @@ public class Helicopter extends Actor {
     private boolean visibility;
     private int radius;
     private int healthlost = 0;
-    
     private int ropelength;
     private Rope rope;
     private Rope rope2;
@@ -40,7 +39,6 @@ public class Helicopter extends Actor {
     public Helicopter() {
         speed = 1;
         radius = 5;
-        
         rope = new Rope();
         rope2 = new Rope();
         rope3 = new Rope();
@@ -54,14 +52,22 @@ public class Helicopter extends Actor {
     public void act() {
         if(time+delay[currentIndex]<=System.currentTimeMillis()) {
             nextFrame();
-         } 
-
-        if (Greenfoot.isKeyDown("w")) move(0, -speed);
-        if (Greenfoot.isKeyDown("s")) move(0, +speed);
+        } 
+        
+        //Check user input
+        if (Greenfoot.isKeyDown("w")) {
+            move(0, -speed);
+        }
+        
+        if (Greenfoot.isKeyDown("s")) {
+            move(0, +speed);
+        }
+        
         if (Greenfoot.isKeyDown("a")) {
             move(-speed, 0); 
             switchImageLeft();
         }
+        
         if (Greenfoot.isKeyDown("d")) {
             move(+speed, 0); 
             switchImageRight();
@@ -81,22 +87,29 @@ public class Helicopter extends Actor {
             decreaseRope(x, y);
         }
         
-        if (atWorldEdge() == true)    
-        {    
+        //Check of helictopter de rand van het scherm aanraakt.
+        
+        if (atWorldEdge() == true) {    
            resetLocation();
         }   
+        
+        //Zorg ervoor dat powerups langzaam uitwerken.
         
         if (--powerUpActsRemaining <= 0) {
             setPowerUp(null);
         }
         
+        //Zorg voor een flikkerende helicopter tijdens het respawnen.
+        
         if (--respawnTimer <= 0) {
             if (xloop < 7) {
                 if (--actsTillFlicker <= 0) {
                      if (!visibility) {
+                         direction = "right";
                          setImage("helikopter_rechts.gif");
                          visibility = true;
                      } else {
+                         direction = "right";
                          setImage("niets.gif");
                          visibility = false;
                      }
@@ -110,8 +123,9 @@ public class Helicopter extends Actor {
                 speed = 1;
                 xloop = 0;
             }
-     
         }
+        
+        //Check collision
         
         Actor menubar = getOneObjectAtOffset(0, 1, MenuBar.class);
         if (menubar != null) {
@@ -122,23 +136,21 @@ public class Helicopter extends Actor {
         }
         
         Actor houselinks = getOneObjectAtOffset(1, 0, House.class);
-        Actor houserechts = getOneObjectAtOffset(-2, 0, House.class);
-        Actor houseboven = getOneObjectAtOffset(0, 1, House.class);
-        
         if (houselinks != null && Greenfoot.isKeyDown("d")) {
             resetLocation();
         }
         
+        Actor houserechts = getOneObjectAtOffset(-2, 0, House.class);
         if (houserechts != null && Greenfoot.isKeyDown("a")) {
             resetLocation();
         }
         
+        Actor houseboven = getOneObjectAtOffset(0, 1, House.class);
         if (houseboven != null && Greenfoot.isKeyDown("s")) {
             resetLocation();
         }
         
         Actor wall = getOneObjectAtOffset(-3, 0, Wall.class);
-        
         if (wall != null && Greenfoot.isKeyDown("a")) {
             resetLocationWall();
         }
@@ -148,17 +160,18 @@ public class Helicopter extends Actor {
             resetLocation();
         }
         
+        //Zet het touw op de goede locatie.
+        
         if (ropelength > 0) {
             int x = getX()+1;
             int y = getY()+2;
-            
             if (direction == "left") {
                 x -= 2;
             }
-            
             rope.setLocation(x,y);
             ropeman.setLocation(x,y+3);
         }
+        
         if (ropelength > 24) {
             int x = getX()+1;
             int y = getY()+2;
@@ -170,6 +183,7 @@ public class Helicopter extends Actor {
             rope2.setLocation(x,y+2);
             ropeman.setLocation(x,y+5);
         }
+        
         if (ropelength > 49) {
             int x = getX()+1;
             int y = getY()+2;
@@ -181,6 +195,7 @@ public class Helicopter extends Actor {
             rope3.setLocation(x,y+4);
             ropeman.setLocation(x,y+7);
         }
+        
         if (ropelength > 74) {
             int x = getX()+1;
             int y = getY()+2;
@@ -192,6 +207,7 @@ public class Helicopter extends Actor {
             rope4.setLocation(x,y+6);
             ropeman.setLocation(x,y+9);
         }
+        
         if (ropelength > 99) {
             int x = getX()+1;
             int y = getY()+2;
@@ -203,6 +219,7 @@ public class Helicopter extends Actor {
             rope5.setLocation(x,y+8);
             ropeman.setLocation(x,y+11);
         }
+        
         if (ropelength > 124) {
             int x = getX()+1;
             int y = getY()+2;
@@ -226,11 +243,13 @@ public class Helicopter extends Actor {
     public int getRadius() {
         return radius;
     }
-
+    
+    //Proces om de helikopter te laten bewegen.
     private void move(int dx, int dy) {
         setLocation(getX() + dx, getY() + dy);
     }
     
+    //Proces om het touw langer te maken.
     public void increaseRope(int x , int y) {
         if (ropelength < 125){
             ropelength ++;
@@ -247,6 +266,7 @@ public class Helicopter extends Actor {
         }
     }
     
+    //Proces om het touw korter te maken.
     public void decreaseRope(int x, int y) {
         if (ropelength > -1) {
             ropelength --;
@@ -263,14 +283,17 @@ public class Helicopter extends Actor {
         }
     }
 
+    //Verhoog snelheid van helikopter
     public void increaseSpeed() {
         speed = 2;
     }
 
+    //Verlaag snelheid van helikopter
     public void decreaseSpeed() {
         speed = 1;
     }
-
+    
+    //Powerups
     private void consumePowerUp() {
         Actor newPowerUp = (Actor)getOneIntersectingObject(PowerUp.class);
         if (newPowerUp != null) {
@@ -291,6 +314,7 @@ public class Helicopter extends Actor {
         powerUpActsRemaining = 1000;
     }
     
+    //Reset helikopter
     private void resetLocation() {
         speed = 0;
         Kaboom kaboom = new Kaboom();
@@ -298,11 +322,13 @@ public class Helicopter extends Actor {
         int y = getY();
         getWorld().addObject(kaboom, x, y);
         setLocation(40, 10);
+        direction = "right";
         respawnTimer = 10;
         HelicopterWorld world = (HelicopterWorld)getWorld();
         world.lostLife();
     }
     
+    //Reset helikopter bij botsing muur
     private void resetLocationWall() {
         speed = 0;
         Kaboom kaboom = new Kaboom();
@@ -315,16 +341,15 @@ public class Helicopter extends Actor {
         world.lostLife();
     }
     
-    protected void switchImageLeft()
-    {
+    //Zorg voor de goede sprite, helikopter naar links of rechts gericht.
+    protected void switchImageLeft() {
         if (direction != "left" && xloop < 1){
             setImage("helikopter_links.gif");
             direction = "left";
         }
     }
 
-    protected void switchImageRight()
-    {
+    protected void switchImageRight() {
         if (direction != "right" && xloop < 1){   
             setImage("helikopter_rechts.gif");
             direction = "right";

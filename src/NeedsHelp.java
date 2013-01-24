@@ -13,27 +13,16 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.List;
 import java.util.ArrayList;
-/**
- * Write a description of class NeedsHelp here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
+
 public class NeedsHelp extends Actor
 {
-    /**
-     * Act - do whatever the NeedsHelp wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     public void addedToWorld(World world)
     {
         setImage("uitroepteken.gif");
     }
-
     
     /** CODE VOOR GIF ANIMATIES */
-    
-    
+
     /** The images used in the animation. */
     private GreenfootImage[] images;
     /** The delay between each frame. */

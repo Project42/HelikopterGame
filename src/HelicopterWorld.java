@@ -8,7 +8,6 @@ public class HelicopterWorld extends World {
     private Helicopter helicopter;
     private Counter scoreCounter;
     private MenuBar menuBar;
-    private Background background;
     private Wall wall;
     private Direction direction;
     private Water water;
@@ -28,8 +27,10 @@ public class HelicopterWorld extends World {
     
     public HelicopterWorld() {
         super(80, 80, 10, false);
+        setBackground("bg.png");
         backgroundMusic.playLoop();
         for (int i = 1; i < 100; ++i) {
+            // Willekeurige huizen en slachtoffers worden in het spel geplaatst.
             Victim victim;
             House house;
             int yvictim = 58;
@@ -73,14 +74,13 @@ public class HelicopterWorld extends World {
             }
             addObject(victim, x, yvictim);
             
+            //Uitroeptekens boven de slachtoffers worden geplaatst.
             needshelp = new NeedsHelp();
             addObject(needshelp, x, yvictim-4);
                 
         }
-
-        background = new Background();
-        addObject(background, 40, 39);
         
+        //Alle start objecten worden geplaatst.
         helicopter = new Helicopter();
         addObject(helicopter, 40, 10);
 
@@ -125,13 +125,15 @@ public class HelicopterWorld extends World {
 
     @Override
     public void act() {
+        //Check actors
         for (Actor actor : (List<Actor>)getObjects(null)) {
             if (actor == helicopter) continue;
             if (actor == scoreCounter) continue;
 
             actor.setLocation(actor.getX() + 40 - helicopter.getX(), actor.getY());
         }
-
+        
+        //PowerUp spawn
         if (Math.random() < 0.003) {
             Actor powerUp;
             switch (Greenfoot.getRandomNumber(2)) {
@@ -144,11 +146,11 @@ public class HelicopterWorld extends World {
             }
             addObject(powerUp, -50 + Greenfoot.getRandomNumber(100), Greenfoot.getRandomNumber(40));
         }
-
+        
+        //Zorg ervoor dat bepaalde objecten een vaste plaats op het scherm hebben.
         helicopter.setLocation(40, helicopter.getY());
         scoreCounter.setLocation(6, 73);
         menuBar.setLocation(39, 75);
-        background.setLocation(40, 39);
         health1.setLocation(60, 73);
         health2.setLocation(64, 73);
         health3.setLocation(68, 73);
@@ -156,20 +158,20 @@ public class HelicopterWorld extends World {
         health5.setLocation(64, 77);
         health6.setLocation(68, 77);
         hp.setLocation(60,64);
-        
-        if (getObjects(Victim.class).size() == 0) {
-            gameOver();
-        }
+    
     }
     
+    //Return water level
     public int getWaterLevel() {
         return water.getLevel();
     }
     
+    //Voegt score toe
     public void addScore(int x) {
         scoreCounter.add(x);
     }
     
+    //Proces bij het verliezen van een leven bij helikopter
     public void lostLife() {
         healthlost ++;
         switch (healthlost) {
@@ -182,6 +184,7 @@ public class HelicopterWorld extends World {
         }
     }
     
+    //Proces bij het verliezen van een leven bij ropeman
     public void lostLifeRope() {
         healthlostrope ++;
         switch (healthlostrope) {
@@ -194,11 +197,8 @@ public class HelicopterWorld extends World {
         }
     }
     
+    //Laad gameover scherm
     private void gameOver() {
         Greenfoot.setWorld(new GameOverWorld(Game.HELICOPTER_GAME, scoreCounter.getValue()));
-    }
-    
-    public void pickUpVictim(int x, int y) {
-        removeObject(victim);
     }
 }
