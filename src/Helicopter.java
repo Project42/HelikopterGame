@@ -22,7 +22,7 @@ public class Helicopter extends Actor {
     private int powerUpActsRemaining;
     public int respawnTimer = 1000000000;
     private int actsTillFlicker;
-    private int xtest = 0;
+    private int xloop = 0;
     private String direction;
     private boolean visibility;
     private int radius;
@@ -91,7 +91,7 @@ public class Helicopter extends Actor {
         }
         
         if (--respawnTimer <= 0) {
-            if (xtest < 7) {
+            if (xloop < 7) {
                 if (--actsTillFlicker <= 0) {
                      if (!visibility) {
                          setImage("helikopter_rechts.gif");
@@ -101,14 +101,14 @@ public class Helicopter extends Actor {
                          visibility = false;
                      }
                      actsTillFlicker = 30;
-                     xtest++;
+                     xloop++;
                 }
             }
-            else if (xtest == 7) {
+            else if (xloop == 7) {
                 respawnTimer = 10000000;
                 setImage("helikopter_rechts.gif");
                 speed = 1;
-                xtest = 0;
+                xloop = 0;
             }
      
         }
@@ -159,7 +159,7 @@ public class Helicopter extends Actor {
             rope.setLocation(x,y);
             ropeman.setLocation(x,y+3);
         }
-        if (ropelength > 49) {
+        if (ropelength > 24) {
             int x = getX()+1;
             int y = getY()+2;
             
@@ -170,7 +170,7 @@ public class Helicopter extends Actor {
             rope2.setLocation(x,y+2);
             ropeman.setLocation(x,y+5);
         }
-        if (ropelength > 99) {
+        if (ropelength > 49) {
             int x = getX()+1;
             int y = getY()+2;
             
@@ -181,7 +181,7 @@ public class Helicopter extends Actor {
             rope3.setLocation(x,y+4);
             ropeman.setLocation(x,y+7);
         }
-        if (ropelength > 149) {
+        if (ropelength > 74) {
             int x = getX()+1;
             int y = getY()+2;
             
@@ -192,7 +192,7 @@ public class Helicopter extends Actor {
             rope4.setLocation(x,y+6);
             ropeman.setLocation(x,y+9);
         }
-        if (ropelength > 199) {
+        if (ropelength > 99) {
             int x = getX()+1;
             int y = getY()+2;
             
@@ -203,7 +203,7 @@ public class Helicopter extends Actor {
             rope5.setLocation(x,y+8);
             ropeman.setLocation(x,y+11);
         }
-        if (ropelength > 249) {
+        if (ropelength > 124) {
             int x = getX()+1;
             int y = getY()+2;
             
@@ -232,18 +232,18 @@ public class Helicopter extends Actor {
     }
     
     public void increaseRope(int x , int y) {
-        if (ropelength < 250){
+        if (ropelength < 125){
             ropelength ++;
         }
         x += 1;
         y += 2;
         switch (ropelength) {
             case 1: getWorld().addObject(rope, x, y); getWorld().addObject(ropeman, x, y+3); break;
-            case 50: y+= 2; getWorld().addObject(rope2, x, y); ropeman.setLocation(x, y+3); break;
-            case 100: y+= 4; getWorld().addObject(rope3, x, y); ropeman.setLocation(x, y+3); break;
-            case 150: y+= 6; getWorld().addObject(rope4, x, y); ropeman.setLocation(x, y+3); break;
-            case 200: y+= 8; getWorld().addObject(rope5, x, y); ropeman.setLocation(x, y+3); break;
-            case 250: y+= 10; getWorld().addObject(rope6, x, y); ropeman.setLocation(x, y+3); break;
+            case 25: y+= 2; getWorld().addObject(rope2, x, y); ropeman.setLocation(x, y+3); break;
+            case 50: y+= 4; getWorld().addObject(rope3, x, y); ropeman.setLocation(x, y+3); break;
+            case 75: y+= 6; getWorld().addObject(rope4, x, y); ropeman.setLocation(x, y+3); break;
+            case 100: y+= 8; getWorld().addObject(rope5, x, y); ropeman.setLocation(x, y+3); break;
+            case 125: y+= 10; getWorld().addObject(rope6, x, y); ropeman.setLocation(x, y+3); break;
         }
     }
     
@@ -254,11 +254,11 @@ public class Helicopter extends Actor {
         x += 1;
         y -= 2;
         switch (ropelength) {
-            case 249: getWorld().removeObject(rope6); ropeman.setLocation(x, y+15); break;
-            case 199: getWorld().removeObject(rope5); ropeman.setLocation(x, y+13); break;
-            case 149: getWorld().removeObject(rope4); ropeman.setLocation(x, y+11); break;
-            case 99: getWorld().removeObject(rope3); ropeman.setLocation(x, y+9); break;
-            case 49: getWorld().removeObject(rope2); ropeman.setLocation(x, y+7); break;
+            case 124: getWorld().removeObject(rope6); ropeman.setLocation(x, y+15); break;
+            case 99: getWorld().removeObject(rope5); ropeman.setLocation(x, y+13); break;
+            case 74: getWorld().removeObject(rope4); ropeman.setLocation(x, y+11); break;
+            case 49: getWorld().removeObject(rope3); ropeman.setLocation(x, y+9); break;
+            case 24: getWorld().removeObject(rope2); ropeman.setLocation(x, y+7); break;
             case 0: getWorld().removeObject(rope); getWorld().removeObject(ropeman); break;
         }
     }
@@ -317,7 +317,7 @@ public class Helicopter extends Actor {
     
     protected void switchImageLeft()
     {
-        if (direction != "left" && xtest < 1){
+        if (direction != "left" && xloop < 1){
             setImage("helikopter_links.gif");
             direction = "left";
         }
@@ -325,7 +325,7 @@ public class Helicopter extends Actor {
 
     protected void switchImageRight()
     {
-        if (direction != "right" && xtest < 1){   
+        if (direction != "right" && xloop < 1){   
             setImage("helikopter_rechts.gif");
             direction = "right";
         }
