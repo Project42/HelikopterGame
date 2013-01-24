@@ -20,8 +20,7 @@ public class Ropeman extends Actor
         radius = 5;
     }
     
-    public void act() 
-    {
+    public void act() {
         List<Actor> victims = getObjectsInRange(radius, Victim.class);
         for (Actor victim : victims) {
             // TODO: Play sound.
@@ -29,7 +28,7 @@ public class Ropeman extends Actor
             world.addScore(50);
             int x = getX();
             int y = getY();
-            world.pickUpVictim(x,y); // MOET NOG WORDEN GEMAAKT
+            world.removeObject(victim);
         }
         
         int waterOffset = 70 - ((HelicopterWorld)getWorld()).getWaterLevel() / 2 / 10;

@@ -189,6 +189,6 @@ public class HelicopterWorld extends World {
     }
     
     public void pickUpVictim(int x, int y) {
-        
+        removeObject(victim);
     }
 }
