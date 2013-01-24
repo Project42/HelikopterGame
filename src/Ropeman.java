@@ -35,6 +35,23 @@ public class Ropeman extends Actor
         if (waterOffset <= getY()) {
             resetRopeman();
         }
+        
+        Actor houselinks = getOneObjectAtOffset(1, 0, House.class);
+        Actor houserechts = getOneObjectAtOffset(-2, 0, House.class);
+        Actor houseboven = getOneObjectAtOffset(0, 2, House.class);
+        
+        if (houselinks != null && Greenfoot.isKeyDown("d")) {
+            resetRopeman();
+        }
+        
+        if (houserechts != null && Greenfoot.isKeyDown("a")) {
+            resetRopeman();
+        }
+        
+        if (houseboven != null && Greenfoot.isKeyDown("s")) {
+            resetRopeman();
+        }
+        
     }    
     
     public void setRadius(int r) {
