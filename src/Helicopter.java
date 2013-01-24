@@ -33,6 +33,8 @@ public class Helicopter extends Actor {
     private Rope rope2;
     private Rope rope3;
     private Rope rope4;
+    private Rope rope5;
+    private Rope rope6;
     private Ropeman ropeman;
 
     public Helicopter() {
@@ -43,6 +45,8 @@ public class Helicopter extends Actor {
         rope2 = new Rope();
         rope3 = new Rope();
         rope4 = new Rope();
+        rope5 = new Rope();
+        rope6 = new Rope();
         ropeman = new Ropeman();
     }
 
@@ -167,6 +171,18 @@ public class Helicopter extends Actor {
             rope4.setLocation(x,y+6);
             ropeman.setLocation(x,y+9);
         }
+        if (ropelength > 199) {
+            int x = getX()+1;
+            int y = getY()+2;
+            rope5.setLocation(x,y+8);
+            ropeman.setLocation(x,y+11);
+        }
+        if (ropelength > 249) {
+            int x = getX()+1;
+            int y = getY()+2;
+            rope6.setLocation(x,y+10);
+            ropeman.setLocation(x,y+13);
+        }
         
         consumePowerUp();
     }
@@ -193,6 +209,8 @@ public class Helicopter extends Actor {
             case 50: y+= 2; getWorld().addObject(rope2, x, y); ropeman.setLocation(x, y+3); break;
             case 100: y+= 4; getWorld().addObject(rope3, x, y); ropeman.setLocation(x, y+3); break;
             case 150: y+= 6; getWorld().addObject(rope4, x, y); ropeman.setLocation(x, y+3); break;
+            case 200: y+= 8; getWorld().addObject(rope5, x, y); ropeman.setLocation(x, y+3); break;
+            case 250: y+= 10; getWorld().addObject(rope6, x, y); ropeman.setLocation(x, y+3); break;
         }
     }
     
@@ -203,6 +221,8 @@ public class Helicopter extends Actor {
         x += 1;
         y -= 2;
         switch (ropelength) {
+            case 249: getWorld().removeObject(rope6); ropeman.setLocation(x, y+15); break;
+            case 199: getWorld().removeObject(rope5); ropeman.setLocation(x, y+13); break;
             case 149: getWorld().removeObject(rope4); ropeman.setLocation(x, y+11); break;
             case 99: getWorld().removeObject(rope3); ropeman.setLocation(x, y+9); break;
             case 49: getWorld().removeObject(rope2); ropeman.setLocation(x, y+7); break;

@@ -112,8 +112,7 @@ public class HelicopterWorld extends World {
         
         health6 = new Health2();
         addObject(health6, 68, 77);
-        
-        
+
         setPaintOrder(Counter.class, HP.class, Health2.class, Health.class, Helicopter.class, MenuBar.class, Wall.class, Water.class, Victim.class, MenuBar.class, House.class, SpeedPowerUp.class, RadiusPowerUp.class);
     }
 
