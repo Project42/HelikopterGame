@@ -33,7 +33,7 @@ public class HelicopterWorld extends World {
             House house;
             int yvictim = 58;
             int yhouse = 65;
-            int x = i * 50 + (-5 + Greenfoot.getRandomNumber(10));
+            int x = i * 50 + (-5 + Greenfoot.getRandomNumber(30));
             int randomhouse = (int)(Math.random() * ((9 - 0) + 1));
             int randomvictim = 0 + (int)(Math.random() * ((7 - 0) + 1));
             switch (randomhouse) {

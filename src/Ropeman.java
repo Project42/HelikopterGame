@@ -15,43 +15,48 @@ public class Ropeman extends Actor
      */
     
     private int radius;
+    private boolean ropemanDead;
     
     public Ropeman() {
         radius = 5;
+    }
+    protected void addedToWorld(World world) { 
+        ropemanDead = false;
     }
     
     public void act() {
         List<Actor> victims = getObjectsInRange(radius, Victim.class);
         for (Actor victim : victims) {
-            // TODO: Play sound.
             HelicopterWorld world = (HelicopterWorld)getWorld();
             world.addScore(50);
             int x = getX();
             int y = getY();
-            world.removeObject(victim);
+            world.removeObject(victim);  
         }
         
         int waterOffset = 70 - ((HelicopterWorld)getWorld()).getWaterLevel() / 2 / 10;
         if (waterOffset <= getY()) {
             resetRopeman();
+            ropemanDead = true;
         }
         
-        Actor houselinks = getOneObjectAtOffset(1, 0, House.class);
-        Actor houserechts = getOneObjectAtOffset(-2, 0, House.class);
-        Actor houseboven = getOneObjectAtOffset(0, 3, House.class);
+        if (!ropemanDead) {
+            Actor houselinks = getOneObjectAtOffset(1, 0, House.class);
+            Actor houserechts = getOneObjectAtOffset(-2, 0, House.class);
+            Actor houseboven = getOneObjectAtOffset(0, 3, House.class);
         
-        if (houselinks != null && Greenfoot.isKeyDown("d")) {
-            resetRopeman();
+            if (houselinks != null && Greenfoot.isKeyDown("d")) {
+                resetRopeman();
+            }
+        
+            if (houserechts != null && Greenfoot.isKeyDown("a")) {
+                resetRopeman();
+            }
+        
+            if (houseboven != null && Greenfoot.isKeyDown("s")) {
+                resetRopeman();
+            }
         }
-        
-        if (houserechts != null && Greenfoot.isKeyDown("a")) {
-            resetRopeman();
-        }
-        
-        if (houseboven != null && Greenfoot.isKeyDown("s")) {
-            resetRopeman();
-        }
-        
     }    
     
     public void setRadius(int r) {
