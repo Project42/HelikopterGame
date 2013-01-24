@@ -100,7 +100,7 @@ public class Helicopter extends Actor {
                          setImage("niets.gif");
                          visibility = false;
                      }
-                     actsTillFlicker = 50;
+                     actsTillFlicker = 30;
                      xtest++;
                 }
             }
@@ -151,36 +151,66 @@ public class Helicopter extends Actor {
         if (ropelength > 0) {
             int x = getX()+1;
             int y = getY()+2;
+            
+            if (direction == "left") {
+                x -= 2;
+            }
+            
             rope.setLocation(x,y);
             ropeman.setLocation(x,y+3);
         }
         if (ropelength > 49) {
             int x = getX()+1;
             int y = getY()+2;
+            
+            if (direction == "left") {
+                x -= 2;
+            }
+            
             rope2.setLocation(x,y+2);
             ropeman.setLocation(x,y+5);
         }
         if (ropelength > 99) {
             int x = getX()+1;
             int y = getY()+2;
+            
+            if (direction == "left") {
+                x -= 2;
+            }
+            
             rope3.setLocation(x,y+4);
             ropeman.setLocation(x,y+7);
         }
         if (ropelength > 149) {
             int x = getX()+1;
             int y = getY()+2;
+            
+            if (direction == "left") {
+                x -= 2;
+            }
+            
             rope4.setLocation(x,y+6);
             ropeman.setLocation(x,y+9);
         }
         if (ropelength > 199) {
             int x = getX()+1;
             int y = getY()+2;
+            
+            if (direction == "left") {
+                x -= 2;
+            }
+            
             rope5.setLocation(x,y+8);
             ropeman.setLocation(x,y+11);
         }
         if (ropelength > 249) {
             int x = getX()+1;
             int y = getY()+2;
+            
+            if (direction == "left") {
+                x -= 2;
+            }
+            
             rope6.setLocation(x,y+10);
             ropeman.setLocation(x,y+13);
         }
