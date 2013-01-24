@@ -1,4 +1,5 @@
 import greenfoot.*;
+import java.util.*;
 
 public class Victim extends Actor {
     @Override

@@ -1,5 +1,5 @@
 import greenfoot.*;
-
+//Stijgend water
 public class Water extends Actor {
     private int acts;
     private int level;
@@ -13,7 +13,7 @@ public class Water extends Actor {
     @Override
     public void act() {
         setLocation(40, 70);
-        
+        //Water komt steeds hoger
         ++acts;
         if (acts == 10) {
             getImage().scale(820, getImage().getHeight() + 1);
