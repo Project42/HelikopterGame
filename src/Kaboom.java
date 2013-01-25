@@ -14,18 +14,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.ArrayList;
 
-/**
- * Write a description of class Kaboom here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class Kaboom extends Actor
 {
-    /**
-     * Act - do whatever the Kaboom wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     public void addedToWorld(World world)
     {
         setImage("ontploffing.gif");
