@@ -10,11 +10,11 @@ public class HelicopterWorld extends World {
     private MenuBar menuBar;
     private Wall wall;
     private Direction direction;
-    private Water water;
+    private HeliWater water;
     private HP hp;
-    private Health health1;
-    private Health health2;
-    private Health health3;
+    private HeliHealth health1;
+    private HeliHealth health2;
+    private HeliHealth health3;
     private Health2 health4;
     private Health2 health5;
     private Health2 health6;
@@ -96,19 +96,19 @@ public class HelicopterWorld extends World {
         wall = new Wall();
         addObject(wall, -35, 40);
 
-        water = new Water();
+        water = new HeliWater();
         addObject(water, 40, 70);
         
         hp = new HP();
         addObject(hp, 60, 64);
         
-        health1 = new Health();
+        health1 = new HeliHealth();
         addObject(health1, 60, 73);
         
-        health2 = new Health();
+        health2 = new HeliHealth();
         addObject(health2, 64, 73);
         
-        health3 = new Health();
+        health3 = new HeliHealth();
         addObject(health3, 68, 73);
         
         health4 = new Health2();
@@ -120,7 +120,7 @@ public class HelicopterWorld extends World {
         health6 = new Health2();
         addObject(health6, 68, 77);
 
-        setPaintOrder(Counter.class, HP.class, Health2.class, Health.class, Helicopter.class, MenuBar.class, Wall.class, Water.class, Victim.class, MenuBar.class, House.class, SpeedPowerUp.class, RadiusPowerUp.class, NeedsHelp.class);
+        setPaintOrder(Counter.class, HP.class, Health2.class, HeliHealth.class, Helicopter.class, MenuBar.class, Wall.class, HeliWater.class, Victim.class, MenuBar.class, House.class, SpeedPowerUp.class, RadiusPowerUp.class, NeedsHelp.class);
     }
 
     @Override

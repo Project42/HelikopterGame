@@ -1,10 +1,10 @@
 import greenfoot.*;
 //Stijgend water
-public class Water extends Actor {
+public class HeliWater extends Actor {
     private int acts;
     private int level;
 
-    public Water() {
+    public HeliWater() {
         getImage().scale(820, 20);
         getImage().setTransparency(100);
         level = 10;
